@@ -38,6 +38,7 @@ function getRiskDecision() {
       })
       .then(res => res.json())
       .then(data => {
+        document.getElementById("sdkPayload").innerText = payload
         document.getElementById("riskResult").innerHTML = "<pre>"+JSON.stringify(data.result, null, 2)+"</pre>"
         document.getElementById("riskDetails").innerHTML = "<pre>"+JSON.stringify(data, null, 2)+"</pre>"
         showRiskResult()
