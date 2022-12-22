@@ -50,6 +50,7 @@ function getRiskDecision() {
 function showRiskResult() {
   document.getElementById("navResult").classList.add("active")
   document.getElementById("riskResult").classList.remove("d-none")
+  document.getElementById("cardPayload").classList.remove("d-none")
   
   document.getElementById("navDetails").classList.remove("active")
   document.getElementById("riskDetails").classList.add("d-none")
