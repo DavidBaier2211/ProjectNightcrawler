@@ -29,9 +29,9 @@ fastify.register(require("@fastify/view"), {
   },
 });
 
-/***
+/******************************************
 * PingOne Risk - Evaluation request
-***/
+******************************************/
 fastify.post("/getRiskDecision", (req, res) => {
   
   // Get P1 Worker Token
@@ -81,6 +81,10 @@ fastify.post("/getRiskDecision", (req, res) => {
       .catch(err => {console.log(err);res.send(err)}) 
   })
 })
+
+/**********************************************
+* Get 
+*/
 
 function getPingOneToken(cb) {
   const url="https://auth.pingone.com/"+process.env.riskEnvId+"/as/token"
