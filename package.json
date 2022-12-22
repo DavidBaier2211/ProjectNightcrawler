@@ -12,7 +12,8 @@
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.6.0",
     "@fastify/view": "^7.3.0",
-    "got": "^11.8.6"
+    "got": "^11.8.6",
+    "btoa": "^1.2.1"
   },
   "engines": {
     "node": "14.x"
