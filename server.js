@@ -58,7 +58,7 @@ fastify.post("/getRiskDecision", (req, res) => {
             "type": "AUTHENTICATION" 
         },
         "user": {
-          "id": "facile-user", // if P1, send in the UserId
+          "id": "facile-user", // if P1, send in the UserId and set `type` to PING_ONE
           "name": "facile-user", // This is displayed in Dashboard and Audit
           "type": "EXTERNAL"
         },
