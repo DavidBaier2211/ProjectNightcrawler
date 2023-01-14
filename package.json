@@ -11,7 +11,7 @@
     "handlebars": "^4.7.7",
     "@fastify/formbody": "^7.4.0",
     "@fastify/static": "^6.6.1",
-    "@fastify/view": "^7.3.0",
+    "@fastify/view": "^7.4.0",
     "got": "^11.8.6",
     "btoa": "^1.2.1"
   },
