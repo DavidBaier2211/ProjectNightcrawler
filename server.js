@@ -22,13 +22,6 @@ fastify.register(require("@fastify/static"), {
 // Formbody lets us parse incoming forms
 fastify.register(require("@fastify/formbody"));
 
-// View is a templating manager for fastify
-fastify.register(require("@fastify/view"), {
-  engine: {
-    handlebars: require("handlebars"),
-  },
-});
-
 /******************************************
 * PingOne Risk - Evaluation request
 ******************************************/
