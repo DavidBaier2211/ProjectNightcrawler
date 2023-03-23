@@ -16,4 +16,30 @@
       src="https://assets.pingone.com/signals/web-sdk/5.0.1/signals-sdk.js"
       defer
     ></script>
-  </head>
+    </head>
+    <body class="bg-danger">
+      <div class="container-fluid">
+        <div class="col">
+          <div class="card w-50 mx-auto mt-4">
+            <div class="card-body">
+              <h5 class="card-title">
+                PingOne Protect - Form Input detection
+              </h5>
+              <p class="card-body">
+                This form is protected by the PingOne Protect service.
+                Signals SDK is embedded in this page, and on Submit, a decision request is made
+              </p>
+              <button class="btn btn-primary mb-3 shadow" onclick="getRiskDecision()">
+                Submit
+              </button>
+              <div class="card-footer bg-white text-end">
+                <a href="https://glitch.com/edit/#!/pingone-risk-signals" class="card-link">View Code</a>
+                <a href="https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-sdk-for-web" class="card-link" target="_blank">Signals SDK</a>
+                <a href="https://apidocs.pingidentity.com/pingone/platform/v1/api/#post-create-risk-evaluation" class="card-link" target="_blank">P1 Protect API</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>
