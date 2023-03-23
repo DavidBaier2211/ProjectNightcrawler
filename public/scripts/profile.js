@@ -57,12 +57,17 @@ function getRiskDecision() {
 }
 
 function showRiskResult() {
+  document.getElementById("cardPayload").classList.remove("d-none")
+  
   document.getElementById("navResult").classList.add("active")
   document.getElementById("riskResult").classList.remove("d-none")
-  document.getElementById("cardPayload").classList.remove("d-none")
+  document.getElementById("navHigh").classList.remove("d-none")
   
   document.getElementById("navDetails").classList.remove("active")
   document.getElementById("riskDetails").classList.add("d-none")
+  
+  document.getElementById("navHigh").classList.remove("active")
+  document.getElementById("predictorsHigh").classList.add("d-none")
 }
 
 function showRiskDetails() {
@@ -71,5 +76,19 @@ function showRiskDetails() {
   
   document.getElementById("navResult").classList.remove("active")
   document.getElementById("riskResult").classList.add("d-none")
+  
+  document.getElementById("predictorsHigh").classList.remove("active")
+  document.getElementById("riskResult").classList.add("d-none")
+}
+
+function showHighResults() {
+  document.getElementById("navHigh").classList.add("active")
+  document.getElementById("predictorsHigh").classList.remove("d-none")
+  
+  document.getElementById("navResult").classList.remove("active")
+  document.getElementById("riskResult").classList.add("d-none")
+  
+  document.getElementById("navDetails").classList.remove("active")
+  document.getElementById("riskDetails").classList.add("d-none")
 }
 
