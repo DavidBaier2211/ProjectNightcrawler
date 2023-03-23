@@ -34,7 +34,11 @@ function getRiskDecision() {
         headers: {
           sdkpayload: payload
         },
-        method: "post"
+        method: "post",
+        body: {
+          username: document.getElementById("floatingInputEmail").value,
+          password: document.getElementById("floatingInputPassword").value
+        }
       })
       .then(res => res.json())
       .then(data => {
