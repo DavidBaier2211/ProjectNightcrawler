@@ -16,41 +16,125 @@
       src="https://assets.pingone.com/signals/web-sdk/5.0.1/signals-sdk.js"
       defer
     ></script>
-    </head>
-    <body class="bg-danger">
-      <div class="container-fluid">
-        <div class="col">
-          <div class="card w-50 mx-auto mt-4">
-            <div class="card-body">
-              <h5 class="card-title">
-                PingOne Protect - Form Input detection
-              </h5>
-              <p class="card-body">
-                This form is protected by the PingOne Protect service.
-                Signals SDK is embedded in this page, and on Submit, a decision request is made
-              </p>
-              <form id="protectDemo">
-                <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatInputEmail" placeholder="name@example.com" value="test@example.com">
-                  <label for="floatInputEmail">What is your email address?</label>
-                </div>
-                <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="floatInputPassword" placeholder="P@ssword!" value="P@ssword!">
-                  <label for="floatInputPassword">Enter your Password</label>
-                </div>
-                <button class="btn btn-primary mb-3 shadow" onclick="getRiskDecision()">
-                  Submit
-                </button>
-              </form>
-
-              <div class="card-footer bg-white text-end">
-                <a href="https://glitch.com/edit/#!/pingone-risk-signals" class="card-link">View Code</a>
-                <a href="https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-sdk-for-web" class="card-link" target="_blank">Signals SDK</a>
-                <a href="https://apidocs.pingidentity.com/pingone/platform/v1/api/#post-create-risk-evaluation" class="card-link" target="_blank">P1 Protect API</a>
+  </head>
+  <body class="bg-danger">
+    <div class="container-fluid">
+      <div class="col">
+        <div class="card w-50 mx-auto mt-4">
+          <div class="card-body">
+            <h5 class="card-title">PingOne Protect - Form Input detection</h5>
+            <p class="card-body">
+              This form is protected by the PingOne Protect service. Signals SDK
+              is embedded in this page, and on Submit, a decision request is
+              made
+            </p>
+            <form id="protectDemo">
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatInputEmail"
+                  placeholder="name@example.com"
+                  value="test@example.com"
+                />
+                <label for="floatInputEmail">What is your email address?</label>
               </div>
+              <div class="form-floating mb-3">
+                <input
+                  type="email"
+                  class="form-control"
+                  id="floatInputPassword"
+                  placeholder="P@ssword!"
+                  value="P@ssword!"
+                />
+                <label for="floatInputPassword">Enter your Password</label>
+              </div>
+              <button
+                class="btn btn-primary mb-3 shadow"
+                onclick="getRiskDecision()"
+              >
+                Submit
+              </button>
+            </form>
+
+            <div class="card-footer bg-white text-end">
+              <a
+                href="https://glitch.com/edit/#!/pingone-risk-signals"
+                class="card-link"
+                >View Code</a
+              >
+              <a
+                href="https://apidocs.pingidentity.com/pingone/native-sdks/v1/api/#pingone-risk-sdk-for-web"
+                class="card-link"
+                target="_blank"
+                >Signals SDK</a
+              >
+              <a
+                href="https://apidocs.pingidentity.com/pingone/platform/v1/api/#post-create-risk-evaluation"
+                class="card-link"
+                target="_blank"
+                >P1 Protect API</a
+              >
             </div>
           </div>
         </div>
+        <div class="card w-50 mx-auto mt-4 d-none" id="cardPayload">
+          <div class="card-body">
+            <h6 class="card-title">Signals SDK Payload</h6>
+            <div
+              class="overflow-auto font-monospace fw-light"
+              id="sdkPayload"
+              style="height: 100px"
+            ></div>
+          </div>
+        </div>
+        <div class="card w-50 mx-auto mt-4 border-info">
+          <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="navResult"
+                  aria-current="true"
+                  href="#"
+                  onclick="showRiskResult()"
+                  >Result</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="navDetails"
+                  aria-current="false"
+                  href="#"
+                  onclick="showRiskDetails()"
+                  >Full Response</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="card-body" id="riskResult">
+            <p>
+              Click the Get Decision button to execute the
+              <code>getData()</code> method to generate the SDK Payload and pass
+              that to a server-side API that will make the
+              <a
+                href="https://apidocs.pingidentity.com/pingone/platform/v1/api/#risk-evaluations"
+                target="_blank"
+                >P1 Risk Evaluation</a
+              >
+              call
+            </p>
+          </div>
+          <div class="card-body d-none" id="riskDetails">
+            <p>
+              Click the Get Decision button to see the details of the Risk
+              Evaluation decision
+            </p>
+          </div>
+        </div>
       </div>
-    </body>
+    </div>
+  </body>
+  <script src="/scripts/profile.js" defer></script>
 </html>
