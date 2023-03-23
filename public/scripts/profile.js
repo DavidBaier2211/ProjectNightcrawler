@@ -43,7 +43,10 @@ function getRiskDecision() {
         document.getElementById("riskDetails").innerHTML = "<pre>"+JSON.stringify(data, null, 2)+"</pre>"
         
         // Extract the Predictor Values
+        const threatDetails = data.details
         
+        //const high = threatDetails.find(predictor => {return predictor.level === "HIGH"})
+        console.log("HIGH Threat: ", threatDetails)
         
         showRiskResult()
       })
