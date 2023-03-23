@@ -45,8 +45,10 @@ function getRiskDecision() {
         // Extract the Predictor Values
         const threatDetails = data.details
         
-        //const high = threatDetails.find(predictor => {return predictor.level === "HIGH"})
-        console.log("HIGH Threat: ", threatDetails)
+//         var jp = require('jsonpath');
+        
+//         //const high = threatDetails.find(predictor => {return predictor.level === "HIGH"})
+        console.log("HIGH Threat: ", jsonpath.query(threatDetails,'$.[?(@.level === "HIGH")].type'))
         
         showRiskResult()
       })
