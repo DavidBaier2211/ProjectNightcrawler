@@ -44,12 +44,12 @@ function getRiskDecision() {
         
         // Extract the Predictor Values
         const threatDetails = data.details
+        const high = jsonPath(threatDetails,'$.[?(@.level === "HIGH")].type')
+        const medium = jsonPath(threatDetails,'$.[?(@.level === "MEDIUM")].type')
+        const low = jsonPath(threatDetails,'$.[?(@.level === "LOW")].type')
         
-//         var jp = require('jsonpath');
-        
-//         //const high = threatDetails.find(predictor => {return predictor.level === "HIGH"})
-        console.log("HIGH Threat: ", jsonpath.query(threatDetails,'$.[?(@.level === "HIGH")].type'))
-        
+        // Populate Tabs
+        document.getElementById("predictorsHigh").innerHTML = "<pre>"+JSON.stringify(high, null, 2)+"</pre>"
         showRiskResult()
       })
       .catch(err => console.log("getRiskDecision: ", err))
