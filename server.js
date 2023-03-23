@@ -27,6 +27,8 @@ fastify.register(require("@fastify/formbody"));
 ******************************************/
 fastify.post("/getRiskDecision", (req, res) => {
   
+  console.log(req)
+  
   let username = "facile-user"
   
   // Grab Username if sent

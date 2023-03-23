@@ -33,14 +33,17 @@ function getRiskDecision() {
     const username = document.getElementById("floatInputEmail").value
     let body = { "username" : username } 
     
+    console.log(body)
+    
     // Pass payload to Server-side to perform the Risk Eval call
     // Server contains the P1 Worker secrets to make the Eval call
     fetch("/getRiskDecision", {
       headers: {
-        sdkpayload: payload
+        sdkpayload: payload,
+        "content-type": "application/json"
       },
       method: "post",
-      body: JSON.stringify(body)
+      body: body
     })
     .then(res => res.json())
     .then(data => {
