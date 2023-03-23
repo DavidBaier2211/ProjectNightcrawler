@@ -44,12 +44,14 @@ function getRiskDecision() {
         
         // Extract the Predictor Values
         const threatDetails = data.details
-        const high = jsonPath(threatDetails,'$.[?(@.level === "HIGH")].type')
-        const medium = jsonPath(threatDetails,'$.[?(@.level === "MEDIUM")].type')
+        const high = jsonPath(threatDetails,'$.[?(@.level === "HIGH")]')
+        const medium = jsonPath(threatDetails,'$.[?(@.level === "MEDIUM")].type')? medium : "No Predictors"
         const low = jsonPath(threatDetails,'$.[?(@.level === "LOW")].type')
         
         // Populate Tabs
         document.getElementById("predictorsHigh").innerHTML = "<pre>"+JSON.stringify(high, null, 2)+"</pre>"
+        document.getElementById("predictorsMed").innerHTML = "<pre>"+JSON.stringify(medium, null, 2)+"</pre>"
+        
         showRiskResult()
       })
       .catch(err => console.log("getRiskDecision: ", err))
@@ -62,12 +64,16 @@ function showRiskResult() {
   document.getElementById("navResult").classList.add("active")
   document.getElementById("riskResult").classList.remove("d-none")
   document.getElementById("navHigh").classList.remove("d-none")
+  document.getElementById("navMed").classList.remove("d-none")
   
   document.getElementById("navDetails").classList.remove("active")
   document.getElementById("riskDetails").classList.add("d-none")
   
   document.getElementById("navHigh").classList.remove("active")
   document.getElementById("predictorsHigh").classList.add("d-none")
+  
+  document.getElementById("navMed").classList.remove("active")
+  document.getElementById("predictorsMed").classList.add("d-none")
 }
 
 function showRiskDetails() {
@@ -77,8 +83,11 @@ function showRiskDetails() {
   document.getElementById("navResult").classList.remove("active")
   document.getElementById("riskResult").classList.add("d-none")
   
-  document.getElementById("predictorsHigh").classList.remove("active")
-  document.getElementById("riskResult").classList.add("d-none")
+  document.getElementById("navHigh").classList.remove("active")
+  document.getElementById("predictorsHigh").classList.add("d-none")
+  
+  document.getElementById("navMed").classList.remove("active")
+  document.getElementById("predictorsMed").classList.add("d-none")
 }
 
 function showHighResults() {
@@ -90,5 +99,22 @@ function showHighResults() {
   
   document.getElementById("navDetails").classList.remove("active")
   document.getElementById("riskDetails").classList.add("d-none")
+  
+  document.getElementById("navMed").classList.remove("active")
+  document.getElementById("predictorsMed").classList.add("d-none")
+}
+
+function showMedResults() {
+  document.getElementById("navMed").classList.add("active")
+  document.getElementById("predictorsMed").classList.remove("d-none")
+  
+  document.getElementById("navResult").classList.remove("active")
+  document.getElementById("riskResult").classList.add("d-none")
+  
+  document.getElementById("navDetails").classList.remove("active")
+  document.getElementById("riskDetails").classList.add("d-none")
+  
+  document.getElementById("navHigh").classList.remove("active")
+  document.getElementById("predictorsHigh").classList.add("d-none")
 }
 
