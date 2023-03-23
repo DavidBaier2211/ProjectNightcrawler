@@ -41,6 +41,10 @@ function getRiskDecision() {
         document.getElementById("sdkPayload").innerText = payload
         document.getElementById("riskResult").innerHTML = "<pre>"+JSON.stringify(data.result, null, 2)+"</pre>"
         document.getElementById("riskDetails").innerHTML = "<pre>"+JSON.stringify(data, null, 2)+"</pre>"
+        
+        // Extract the Predictor Values
+        
+        
         showRiskResult()
       })
       .catch(err => console.log("getRiskDecision: ", err))
