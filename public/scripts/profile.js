@@ -29,40 +29,40 @@ function getRiskDecision() {
   _pingOneSignals.getData()
     .then(payload => {
     
-      let body = {
-        "username": "facile-user"
-      }
+    // Grab the Username
+    const username = document.getElementById("floatInputEmail").value
+    let body = { "username" : username } 
     
-      // Pass payload to Server-side to perform the Risk Eval call
-      // Server contains the P1 Worker secrets to make the Eval call
-      fetch("/getRiskDecision", {
-        headers: {
-          sdkpayload: payload
-        },
-        method: "post",
-        body: JSON.stringify(body)
-      })
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("sdkPayload").innerText = payload
-        document.getElementById("riskResult").innerHTML = "<pre>"+JSON.stringify(data.result, null, 2)+"</pre>"
-        document.getElementById("riskDetails").innerHTML = "<pre>"+JSON.stringify(data, null, 2)+"</pre>"
-        
-        // Extract the Predictor Values
-        const threatDetails = data.details
-             
-        const high = jsonPath(threatDetails,'$.[?(@.level === "HIGH")]')
-        const medium = jsonPath(threatDetails,'$.[?(@.level === "MEDIUM")].type')
-        const low = jsonPath(threatDetails,'$.[?(@.level === "LOW")].type')
-        
-        // Populate Tabs
-        document.getElementById("predictorsHigh").innerHTML = "<pre>"+JSON.stringify(high, null, 2)+"</pre>"
-        document.getElementById("predictorsMed").innerHTML = "<pre>"+JSON.stringify(medium, null, 2)+"</pre>"
-        document.getElementById("predictorsLow").innerHTML = "<pre>"+JSON.stringify(low, null, 2)+"</pre>"
-        
-        showRiskResult()
-      })
-      .catch(err => console.log("getRiskDecision: ", err))
+    // Pass payload to Server-side to perform the Risk Eval call
+    // Server contains the P1 Worker secrets to make the Eval call
+    fetch("/getRiskDecision", {
+      headers: {
+        sdkpayload: payload
+      },
+      method: "post",
+      body: JSON.stringify(body)
+    })
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("sdkPayload").innerText = payload
+      document.getElementById("riskResult").innerHTML = "<pre>"+JSON.stringify(data.result, null, 2)+"</pre>"
+      document.getElementById("riskDetails").innerHTML = "<pre>"+JSON.stringify(data, null, 2)+"</pre>"
+
+      // Extract the Predictor Values
+      const threatDetails = data.details
+
+      const high = jsonPath(threatDetails,'$.[?(@.level === "HIGH")]')
+      const medium = jsonPath(threatDetails,'$.[?(@.level === "MEDIUM")].type')
+      const low = jsonPath(threatDetails,'$.[?(@.level === "LOW")].type')
+
+      // Populate Tabs
+      document.getElementById("predictorsHigh").innerHTML = "<pre>"+JSON.stringify(high, null, 2)+"</pre>"
+      document.getElementById("predictorsMed").innerHTML = "<pre>"+JSON.stringify(medium, null, 2)+"</pre>"
+      document.getElementById("predictorsLow").innerHTML = "<pre>"+JSON.stringify(low, null, 2)+"</pre>"
+
+      showRiskResult()
+    })
+    .catch(err => console.log("getRiskDecision: ", err))
   })
 }
 

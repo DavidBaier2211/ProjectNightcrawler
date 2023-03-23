@@ -34,7 +34,6 @@ fastify.post("/getRiskDecision", (req, res) => {
     username = JSON.parse(req.body).username
   }
   
-  console.log("Body: ", username)
   
   // Get P1 Worker Token
   getPingOneToken(pingOneToken => {
