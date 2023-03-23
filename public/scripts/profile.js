@@ -35,10 +35,10 @@ function getRiskDecision() {
           sdkpayload: payload
         },
         method: "post",
-        body: {
-          username: document.getElementById("floatingInputEmail").value,
-          password: document.getElementById("floatingInputPassword").value
-        }
+        body: JSON.stringify({
+          username: document.getElementById("floatInputEmail").value,
+          password: document.getElementById("floatInputPassword").value
+        })
       })
       .then(res => res.json())
       .then(data => {

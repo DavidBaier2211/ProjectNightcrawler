@@ -27,6 +27,15 @@ fastify.register(require("@fastify/formbody"));
 ******************************************/
 fastify.post("/getRiskDecision", (req, res) => {
   
+  let username = "facile-user"
+  
+  // Grab Username if sent
+  if (req.body){
+    username = JSON.parse(req.body).username
+  }
+  
+  console.log("Body: ", username)
+  
   // Get P1 Worker Token
   getPingOneToken(pingOneToken => {
     
@@ -51,8 +60,8 @@ fastify.post("/getRiskDecision", (req, res) => {
             "type": "AUTHENTICATION" 
         },
         "user": {
-          "id": "facile-user", // if P1, send in the UserId and set `type` to PING_ONE
-          "name": "facile-user", // This is displayed in Dashboard and Audit
+          "id": username, // if P1, send in the UserId and set `type` to PING_ONE
+          "name": username, // This is displayed in Dashboard and Audit
           "type": "EXTERNAL"
         },
         "sharingType": "PRIVATE", 
