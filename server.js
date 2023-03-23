@@ -30,7 +30,7 @@ fastify.post("/getRiskDecision", (req, res) => {
   let username = "facile-user"
   
   // Grab Username if sent
-  if (req.body){
+  if (JSON.parse(req.body).username){
     username = JSON.parse(req.body).username
   }
   

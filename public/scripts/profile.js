@@ -28,6 +28,11 @@ function getRiskDecision() {
   // Collect payload from Signals SDK
   _pingOneSignals.getData()
     .then(payload => {
+    
+      let body = {
+        "username": "facile-user"
+      }
+    
       // Pass payload to Server-side to perform the Risk Eval call
       // Server contains the P1 Worker secrets to make the Eval call
       fetch("/getRiskDecision", {
@@ -35,10 +40,7 @@ function getRiskDecision() {
           sdkpayload: payload
         },
         method: "post",
-        body: JSON.stringify({
-          username: document.getElementById("floatInputEmail").value,
-          password: document.getElementById("floatInputPassword").value
-        })
+        body: JSON.stringify(body)
       })
       .then(res => res.json())
       .then(data => {
