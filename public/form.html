@@ -23,11 +23,16 @@
         <div class="card w-50 mx-auto mt-4">
           <div class="card-body">
             <h5 class="card-title">PingOne Protect - Form Input detection</h5>
-            <p class="card-body">
+            <p>
               This form is protected by the PingOne Protect service. Signals SDK
               is embedded in this page, and on Submit, a decision request is
-              made
+              made.
             </p>
+            <p>
+              Signals SDK is observing the session's interaction with this form to
+              determine if there is fraudulant behavior.
+            </p>
+            <hr>
             <form id="protectDemo">
               <div class="form-floating mb-3">
                 <input
@@ -59,6 +64,8 @@
             </form>
 
             <div class="card-footer bg-white text-end">
+              <a href="/"class="card-link text-start">Basic Profiling</a>
+
               <a
                 href="https://glitch.com/edit/#!/pingone-risk-signals"
                 class="card-link"
