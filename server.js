@@ -25,17 +25,11 @@ fastify.register(require("@fastify/formbody"));
 /******************************************
 * PingOne Risk - Evaluation request
 ******************************************/
-fastify.post("/getRiskDecision", (req, res) => {
+fastify.post("/getRiskDecision", (req, res) => {  
   
-  console.log(req)
+  console.log(req.body)
   
-  let username = "facile-user"
-  
-  // Grab Username if sent
-  if (JSON.parse(req.body).username){
-    username = JSON.parse(req.body).username
-  }
-  
+  const username = req.body.username
   
   // Get P1 Worker Token
   getPingOneToken(pingOneToken => {

@@ -43,7 +43,7 @@ function getRiskDecision() {
         "content-type": "application/json"
       },
       method: "post",
-      body: body
+      body: JSON.stringify(body)
     })
     .then(res => res.json())
     .then(data => {
