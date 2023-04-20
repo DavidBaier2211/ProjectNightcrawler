@@ -27,9 +27,11 @@ fastify.register(require("@fastify/formbody"));
 ******************************************/
 fastify.all("/getRiskDecision", (req, res) => {  
   
-  console.log(req)
+  //console.log(req)
   
   const username = req.body.username
+  
+  console.log("Getting Risk Eval for: ", username)
   
   // Get P1 Worker Token
   getPingOneToken(pingOneToken => {
