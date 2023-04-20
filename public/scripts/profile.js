@@ -14,10 +14,9 @@ onPingOneSignalsReady(function () {
     }).then(function () {
         console.log("PingOne Signals initialized successfully");
     // Uncomment the below if you want to profile on init
-    //     return _pingOneSignals.getData()
-     // }).then(function (result) {
-   // document.getElementById("sdkPayload").innerText = payload
-    //     console.log("get data completed: " + result)
+        return _pingOneSignals.getData()
+     }).then(function (payload) {
+         document.getElementById("sdkPayload").innerText = payload
     }).catch(function (e) {
         console.error("SDK Init failed", e);
         document.getElementById("sdkPayload").value = e
@@ -28,8 +27,8 @@ onPingOneSignalsReady(function () {
 // This is a server-side call due to the P1 Protect request needing a Worker token
 function getRiskDecision() {
   // Collect payload from Signals SDK
-  _pingOneSignals.getData()
-    .then(payload => {
+  // _pingOneSignals.getData()
+  //   .then(payload => {
     
     // Grab the Username
     const username = document.getElementById("floatInputEmail").value
@@ -41,7 +40,7 @@ function getRiskDecision() {
     // Server contains the P1 Worker secrets to make the Eval call
     fetch("/getRiskDecision", {
       headers: {
-        sdkpayload: payload,
+        sdkpayload: document.getElementById("sdkPayload").innerText,
         "content-type": "application/json"
       },
       method: "post",
@@ -49,7 +48,7 @@ function getRiskDecision() {
     })
     .then(res => res.json())
     .then(data => {
-      document.getElementById("sdkPayload").innerText = payload
+      // document.getElementById("sdkPayload").innerText = payload
       document.getElementById("riskResult").innerHTML = "<pre>"+JSON.stringify(data.result, null, 2)+"</pre>"
       document.getElementById("riskDetails").innerHTML = "<pre>"+JSON.stringify(data, null, 2)+"</pre>"
 
@@ -68,7 +67,7 @@ function getRiskDecision() {
       showRiskResult()
     })
     .catch(err => console.log("getRiskDecision: ", err))
-  })
+  // })
 }
 
 /* Below functions used to parse and display the Evaluation response */
