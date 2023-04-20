@@ -15,7 +15,8 @@ onPingOneSignalsReady(function () {
         console.log("PingOne Signals initialized successfully");
     // Uncomment the below if you want to profile on init
     //     return _pingOneSignals.getData()
-    // }).then(function (result) {
+     // }).then(function (result) {
+   // document.getElementById("sdkPayload").innerText = payload
     //     console.log("get data completed: " + result)
     }).catch(function (e) {
         console.error("SDK Init failed", e);
@@ -24,6 +25,7 @@ onPingOneSignalsReady(function () {
 });
 
 // Perform Risk Eval on button click event
+// This is a server-side call due to the P1 Protect request needing a Worker token
 function getRiskDecision() {
   // Collect payload from Signals SDK
   _pingOneSignals.getData()
@@ -69,6 +71,7 @@ function getRiskDecision() {
   })
 }
 
+/* Below functions used to parse and display the Evaluation response */
 function showRiskResult() {
   document.getElementById("cardPayload").classList.remove("d-none")
   
