@@ -96,13 +96,22 @@ function getPingOneToken(cb) {
 		  headers: {
 		    'Content-type': 'application/json',
 		  },
-		  body: JSON.stringify({ description: `spotiforked from ${playlistUser}/${forkedFrom}`, name: `${playlistName}`, public : true})
+		  body: JSON.stringify(data)
 		};
   // console.log(url)
   
-  got.post(url, options)
-    .json()
-    .then(data => cb(data.access_token))
+  got.post(url, 
+           {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'client_id='+process.env.clientId+'&client_secret='+ process.env.clientSecret+'&grant_type=client_credentials'
+            })
+    //.json()
+    .then(data => {
+      console.log(data)
+      cb(data.access_token)
+    })
     .catch(err => console.log("getPingOneToken Error: ", err))
 }
 
