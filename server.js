@@ -88,25 +88,18 @@ fastify.all("/getRiskDecision", (req, res) => {
 function getPingOneToken(cb) {
   const url="https://auth.pingone.eu/"+process.env.envId+"/as/token"
   const basicAuth=btoa(process.env.clientId+":"+process.env.clientSecret)
-  const data = { client_id:process.env.clientId,
-                client_secret:process.env.clientSecret,
-                grant_type: "client_credentials"};
+  const data = { "client_id":process.env.clientId,
+                "client_secret":process.env.clientSecret,
+                "grant_type": "client_credentials"};
   var options = {
-		  json: true, 
 		  headers: {
-		    'Content-type': 'application/json',
+		    'Content-type': 'application/x-www-form-urlencoded',
 		  },
 		  body: JSON.stringify(data)
 		};
   // console.log(url)
   
-  got.post(url, 
-           {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: 'client_id='+process.env.clientId+'&client_secret='+ process.env.clientSecret+'&grant_type=client_credentials'
-            })
+  got.post(url, options)
     //.json()
     .then(data => {
       console.log(data)
