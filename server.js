@@ -37,7 +37,7 @@ fastify.all("/getRiskDecision", (req, res) => {
   getPingOneToken(pingOneToken => {
     
     // URL must match the Risk EnvID used to create the payload
-    const url="https://api.pingone.com/v1/environments/"+process.env.envId+"/riskEvaluations"
+    const url="https://api.pingone.eu/v1/environments/"+process.env.envId+"/riskEvaluations"
     
     // Construct Risk headers
     const headers = {
@@ -86,7 +86,7 @@ fastify.all("/getRiskDecision", (req, res) => {
 ***********************************************/
 
 function getPingOneToken(cb) {
-  const url="https://auth.pingone.com/"+process.env.envId+"/as/token"
+  const url="https://auth.pingone.eu/"+process.env.envId+"/as/token"
   const basicAuth=btoa(process.env.clientId+":"+process.env.clientSecret)
   
   // console.log(url)
