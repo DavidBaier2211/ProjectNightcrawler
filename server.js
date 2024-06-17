@@ -93,9 +93,10 @@ function getPingOneToken(cb) {
   
   got.post(url, {
     headers: {
-      Authorization: "Basic "+basicAuth
     },
     form: {
+      client_id:process.env.clientId,
+      client_secret:process.env.clientSecret,
       grant_type: "client_credentials"
     }
   })
