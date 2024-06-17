@@ -43,34 +43,9 @@ fastify.all("/getRiskDecision", (req, res) => {
     // Construct Risk headers
     const headers = {
       Authorization: "Bearer " + pingOneToken,
-      //"X-SDK-DATA-PAYLOAD": req.headers.sdkpayload, // Signals SDK payload from Client
     };
 
-    // Construct Risk Eval body
     const body = {
-      event: {
-        targetResource: {
-          id: "Signals SDK demo",
-          name: "Signals SDK demo",
-        },
-        ip: req.headers["x-forwarded-for"].split(",")[0],
-        flow: {
-          type: "AUTHENTICATION",
-        },
-        user: {
-          id: username, // if P1, send in the UserId and set `type` to PING_ONE
-          name: username, // This is displayed in Dashboard and Audit
-          type: "EXTERNAL",
-        },
-        sharingType: "PRIVATE",
-        origin: "MY_DEMO",
-      },
-      riskPolicySet: {
-        id: "7a87b5da-449f-0bd0-14e3-4fd989a62b0c", // This is the Policy your asking for a decision from
-      },
-    };
-
-    const body2 = {
       event: {
         targetResource: {
           id: "My Demo",
@@ -117,7 +92,7 @@ fastify.all("/getRiskDecision", (req, res) => {
     got(url, {
       headers: headers,
       method: "post",
-      json: body2,
+      json: body,
     })
       .json()
       .then((data) => res.send(data))
@@ -135,23 +110,8 @@ fastify.all("/getRiskDecision", (req, res) => {
 function getPingOneToken(cb) {
   const url = "https://auth.pingone.eu/" + process.env.envId + "/as/token";
   const basicAuth = btoa(process.env.clientId + ":" + process.env.clientSecret);
-  const data = {
-    client_id: process.env.clientId,
-    client_secret: process.env.clientSecret,
-    grant_type: "client_credentials",
-  };
-  var options = {
-    headers: {
-      "Content-type": "application/x-www-form-urlencoded",
-    },
-    body: JSON.stringify(data),
-  };
-  // console.log(url)
-
-  //got.post(url, options)
-  //.json()
-  got
-    .post(url, {
+  
+  got.post(url, {
       headers: {
         Authorization: "Basic " + basicAuth,
       },
