@@ -92,9 +92,7 @@ function getPingOneToken(cb) {
   // console.log(url)
   
   got.post(url, {
-    headers: {
-    },
-    form: {
+    body: {
       client_id:process.env.clientId,
       client_secret:process.env.clientSecret,
       grant_type: "client_credentials"
