@@ -76,7 +76,7 @@ fastify.all("/getRiskDecision", (req, res) => {
             },
           ],*/
         },
-        sharingType: "SHARED",
+        sharingType: "PRIVATE",
         browser: {
           userAgent:
             "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.122 Safari/537.36",
