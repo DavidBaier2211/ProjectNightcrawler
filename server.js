@@ -99,11 +99,19 @@ function getPingOneToken(cb) {
 		};
   // console.log(url)
   
-  got.post(url, options)
+  //got.post(url, options)
     //.json()
+  got.post(url, {
+    headers: {
+      Authorization: "Basic "+basicAuth
+    },
+    form: {
+      grant_type: "client_credentials"
+    }
+  })
     .then(data => {
-      console.log(data)
-      cb(data.access_token)
+      console.log(JSON.parse(data.body).access_token)
+      cb(JSON.parse(data.body).access_token)
     })
     .catch(err => console.log("getPingOneToken Error: ", err))
 }
