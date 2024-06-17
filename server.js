@@ -62,10 +62,10 @@ fastify.all("/getRiskDecision", (req, res) => {
           "type": "EXTERNAL"
         },
         "sharingType": "PRIVATE", 
-        "origin": "FACILE_DEMO" 
+        "origin": "MY_DEMO" 
       },
       "riskPolicySet": {
-        "id": "51f11de3-d6cb-0c8b-0b49-0e7e44ad6cf9" // This is the Policy your asking for a decision from
+        "id": "7a87b5da-449f-0bd0-14e3-4fd989a62b0c" // This is the Policy your asking for a decision from
       }
     }
     
@@ -110,7 +110,6 @@ function getPingOneToken(cb) {
     }
   })
     .then(data => {
-      console.log(JSON.parse(data.body).access_token)
       cb(JSON.parse(data.body).access_token)
     })
     .catch(err => console.log("getPingOneToken Error: ", err))
