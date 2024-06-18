@@ -60,9 +60,9 @@ fastify.all("/getRiskDecision", (req, res) => {
         flow: {
           type: "AUTHENTICATION",
         },
-        session: {
+        /*session: {
           id: "1",
-        },
+        },*/
         user: {
           id: username,
           name: username,
