@@ -131,7 +131,11 @@ fastify.all("/getRiskPolicy", (req, res) => {
     })
       .json()
       .then((data) => {
-        console.log(data);
+        const content = data._embedded.riskPolicySets[0];
+        const predictorIDs = data._embedded.riskPolicySets[0].evaluatedPredictors
+        console.log(content);
+        console.log(predictorIDs);
+        
         //res.send(data);
       })
       .catch((err) => {
