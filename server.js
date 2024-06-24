@@ -123,8 +123,8 @@ fastify.all("/getRiskPolicy", (req, res) => {
     const headers = {
       Authorization: "Bearer " + pingOneToken,
     };
-
-    // Make the call to PingOne Protect endpoint
+    
+    /* Make the call to PingOne Protect endpoint*/
     got(url, {
       headers: headers,
       method: "get"
@@ -135,7 +135,7 @@ fastify.all("/getRiskPolicy", (req, res) => {
         const predictorIDs = data._embedded.riskPolicySets[0].evaluatedPredictors
         console.log(content);
         console.log(predictorIDs);
-        
+      
         //res.send(data);
       })
       .catch((err) => {
