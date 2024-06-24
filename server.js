@@ -109,8 +109,6 @@ fastify.all("/getRiskDecision", (req, res) => {
 fastify.all("/getRiskPolicy", (req, res) => {
   //console.log(req)
 
-  const username = req.body.username;
-
   console.log("Get risk policy");
 
   // Get P1 Worker Token
@@ -119,9 +117,9 @@ fastify.all("/getRiskPolicy", (req, res) => {
     const url =
       "https://api.pingone.eu/v1/environments/" +
       process.env.envId +
-      "/riskEvaluations";
+      "/riskPolicySets";
 
-    // Construct Risk headers
+    // Construct headers
     const headers = {
       Authorization: "Bearer " + pingOneToken,
     };
@@ -132,7 +130,10 @@ fastify.all("/getRiskPolicy", (req, res) => {
       method: "get"
     })
       .json()
-      .then((data) => res.send(data))
+      .then((data) => {
+        console.log(data);
+        //res.send(data);
+      })
       .catch((err) => {
         console.log(err);
         res.send(err);
