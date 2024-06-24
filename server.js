@@ -103,6 +103,44 @@ fastify.all("/getRiskDecision", (req, res) => {
   });
 });
 
+/******************************************
+ * PingOne Risk - Get Risk policy information
+ ******************************************/
+fastify.all("/getRiskPolicy", (req, res) => {
+  //console.log(req)
+
+  const username = req.body.username;
+
+  console.log("Get risk policy");
+
+  // Get P1 Worker Token
+  getPingOneToken((pingOneToken) => {
+    // URL must match the Risk EnvID used to create the payload
+    const url =
+      "https://api.pingone.eu/v1/environments/" +
+      process.env.envId +
+      "/riskEvaluations";
+
+    // Construct Risk headers
+    const headers = {
+      Authorization: "Bearer " + pingOneToken,
+    };
+
+    // Make the call to PingOne Protect endpoint
+    got(url, {
+      headers: headers,
+      method: "get"
+    })
+      .json()
+      .then((data) => res.send(data))
+      .catch((err) => {
+        console.log(err);
+        res.send(err);
+      });
+  });
+});
+
+
 /**********************************************
  * Get Worker token for P1 API call
  ***********************************************/
