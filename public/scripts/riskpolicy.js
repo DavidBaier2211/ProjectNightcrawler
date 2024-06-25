@@ -10,6 +10,16 @@ function getRiskPolicy() {
     .then(res => res.json())
     .then(data => {
       console.log("Server data: "+data);
+      
+      const riskPol_high = data._embedded.riskPolicySets[0];
+      const riskPol_medium = data._embedded.riskPolicySets[1];
+      const predictorIDs = data[0].evaluatedPredictors;
+      const predictors = data[1];
+      
+      const contentDiv = document.getElementById('content');
+      
+      
+      
     })
     .catch(err => console.log("getRiskPolicy: ", err))
   // })

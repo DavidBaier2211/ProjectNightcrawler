@@ -136,8 +136,7 @@ fastify.all("/getRiskPolicy", (req, res) => {
     })
       .json()
       .then((data) => {
-        const content = data._embedded.riskPolicySets[0];
-        const predictorIDs = data._embedded.riskPolicySets[0].evaluatedPredictors
+        const content = data
         
         
         //res.send(data);
@@ -148,8 +147,6 @@ fastify.all("/getRiskPolicy", (req, res) => {
         })
           .json()
           .then((data) => {
-            console.log(content);
-            console.log(predictorIDs);
             console.log(data);
             
             const out = [content,data]
