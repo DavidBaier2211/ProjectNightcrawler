@@ -16,12 +16,7 @@ function getRiskPolicy() {
       
       const obj = createTableObject(data);
       
-      createTable([
-        {name: 'Banana', price: '3.04'},
-        {name: 'Orange', price: '2.56'},
-        {name: 'Apple', price: '1.45'}
-      ],
-      ['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
+      createTable(obj,['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
       
       
     })
@@ -77,7 +72,7 @@ function createTableObject(data){
     riskPol_high.condition.aggregatedScores.forEach((elem) => {
       let obj = {};
       obj.name = predTitles[i];
-      obj.medium = elem.score/2;
+      obj.medium = Math.round(elem.score/2);
       obj.high = elem.score;
       
       output.push(obj);
@@ -85,5 +80,5 @@ function createTableObject(data){
       i++;
     });
     
-    console.log(output);
+    return output;
 }
