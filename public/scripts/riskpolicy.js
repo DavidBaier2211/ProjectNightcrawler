@@ -41,8 +41,13 @@ function createTable(objectArray, fields, fieldTitles) {
   let tr = document.createElement('tr');
   objectArray.forEach((object) => {
     let tr = document.createElement('tr');
+    let i = 0;
     fields.forEach((field) => {
       var td = document.createElement('td');
+      if(i>0){
+        td.style.cssText = 'text-align:center;';
+      }
+      
       td.appendChild(document.createTextNode(object[field]));
       tr.appendChild(td);
     });
