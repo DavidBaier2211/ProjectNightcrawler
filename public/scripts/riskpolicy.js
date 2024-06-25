@@ -14,9 +14,11 @@ function getRiskPolicy() {
       const contentDiv = document.getElementById('content');
       
       
-      const obj = createTableObject(data);
+      const obj = createRiskTableData(data);
       
       createTable(obj,['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
+      
+      
       
       
     })
@@ -67,7 +69,7 @@ function createTable(objectArray, fields, fieldTitles) {
   return tbl;
 }
 
-function createTableObject(data){
+function createRiskTableData(data){
     const riskPol_high = data[0]._embedded.riskPolicySets[0].riskPolicies[0];
     const riskPol_medium = data[0]._embedded.riskPolicySets[0].riskPolicies[1];
     const predictorIDs = data[0]._embedded.riskPolicySets[0].evaluatedPredictors;
@@ -86,8 +88,43 @@ function createTableObject(data){
     riskPol_high.condition.aggregatedScores.forEach((elem) => {
       let obj = {};
       obj.name = predTitles[i];
-      if(obj.name == 'New Devive' || obj.name == 'Anonymous Network Detection' || obj.name == 'Geovelocity Anomaly')
-      obj.medium = Math.round(elem.score/2);
+      if(obj.name == 'New Device' || obj.name == 'Anonymous Network Detection' || obj.name == 'Geovelocity Anomaly')
+        obj.medium = '--';
+      else obj.medium = Math.round(elem.score/2);
+      
+      obj.high = elem.score;
+      
+      output.push(obj);
+      
+      i++;
+    });
+    
+    return output;
+}
+
+function createThresholdData(data){
+    const riskPol_high = data[0]._embedded.riskPolicySets[0].riskPolicies[0];
+    const riskPol_medium = data[0]._embedded.riskPolicySets[0].riskPolicies[1];
+    const predictorIDs = data[0]._embedded.riskPolicySets[0].evaluatedPredictors;
+    const predictors = data[1];
+  
+    let output = [];
+  
+    let predTitles = [];
+  
+    predictorIDs.forEach( (elem) => {
+      const json = jsonPath(predictors,'$._embedded.riskPredictors[?(@.id=="'+elem.id+'")]');
+      predTitles.push(json[0].name);
+    });
+    
+    let i = 0;
+    riskPol_high.condition.aggregatedScores.forEach((elem) => {
+      let obj = {};
+      obj.name = predTitles[i];
+      if(obj.name == 'New Device' || obj.name == 'Anonymous Network Detection' || obj.name == 'Geovelocity Anomaly')
+        obj.medium = '--';
+      else obj.medium = Math.round(elem.score/2);
+      
       obj.high = elem.score;
       
       output.push(obj);
