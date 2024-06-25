@@ -18,7 +18,7 @@ function getRiskPolicy() {
       
       createTable(obj,['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
       
-      
+      const obj2 = createThresholdData(data)
       
       
     })
@@ -103,34 +103,15 @@ function createRiskTableData(data){
 }
 
 function createThresholdData(data){
-    const riskPol_high = data[0]._embedded.riskPolicySets[0].riskPolicies[0];
-    const riskPol_medium = data[0]._embedded.riskPolicySets[0].riskPolicies[1];
-    const predictorIDs = data[0]._embedded.riskPolicySets[0].evaluatedPredictors;
-    const predictors = data[1];
+  const riskPol_high_value = data[0]._embedded.riskPolicySets[0].riskPolicies[0].condition.between.minScore;
+  const riskPol_medium_value = data[0]._embedded.riskPolicySets[0].riskPolicies[1].condition.between.minScore;
   
-    let output = [];
+  let output = [];
   
-    let predTitles = [];
+  let predTitles = [];
   
-    predictorIDs.forEach( (elem) => {
-      const json = jsonPath(predictors,'$._embedded.riskPredictors[?(@.id=="'+elem.id+'")]');
-      predTitles.push(json[0].name);
-    });
+  output.push({'high':riskPol_high_value,'text':'and above'});
+  output.push({'medium':riskPol_medium_value,'text':'and above'});
     
-    let i = 0;
-    riskPol_high.condition.aggregatedScores.forEach((elem) => {
-      let obj = {};
-      obj.name = predTitles[i];
-      if(obj.name == 'New Device' || obj.name == 'Anonymous Network Detection' || obj.name == 'Geovelocity Anomaly')
-        obj.medium = '--';
-      else obj.medium = Math.round(elem.score/2);
-      
-      obj.high = elem.score;
-      
-      output.push(obj);
-      
-      i++;
-    });
-    
-    return output;
+  return output;
 }
