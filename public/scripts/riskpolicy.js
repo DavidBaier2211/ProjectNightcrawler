@@ -16,18 +16,18 @@ function getRiskPolicy() {
       
       const obj = createRiskTableData(data);
       
-      createTable('contentRiskPol',obj,['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
+      createRiskPolTable('contentRiskPol',obj,['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
       
       const obj2 = createThresholdData(data)
       
-      createTable('contentThreshold',obj2,['value1', 'value2'], ['High', 'Medium']);
+      createThresholdTable('contentThreshold',obj2,['value1', 'value2'], ['High', 'Medium']);
       
     })
     .catch(err => console.log("getRiskPolicy: ", err))
   // })
 }
 
-function createTable(elem,objectArray, fields, fieldTitles) {
+function createRiskPolTable(elem,objectArray, fields, fieldTitles) {
   let body = document.getElementById(elem);
   let tbl = document.createElement('table');
   let thead = document.createElement('thead');
@@ -67,6 +67,42 @@ function createTable(elem,objectArray, fields, fieldTitles) {
   });
   tbl.appendChild(tbdy);
   body.appendChild(tbl)
+  return tbl;
+}
+
+function createThresholdTable(elem,objectArray, fields, fieldTitles) {
+  let body = document.getElementById(elem);
+  let tbl = document.createElement('table');
+  let thead = document.createElement('thead');
+  let thr = document.createElement('tr');
+  let i=0;
+  fieldTitles.forEach((fieldTitle) => {
+    let th = document.createElement('th');
+    if(i==0){
+      th.style.cssText = 'width:60%;';
+    }
+    th.appendChild(document.createTextNode(fieldTitle));
+    thr.appendChild(th);
+    i++;
+  });
+  thead.appendChild(thr);
+  tbl.appendChild(thead);
+
+  let tbdy = document.createElement('tbody');
+  let tr = document.createElement('tr');
+  objectArray.forEach((object) => {
+    let tr = document.createElement('tr');
+    fields.forEach((field) => {
+      var td = document.createElement('td');
+      
+      td.appendChild(document.createTextNode(object[field]));
+      tr.appendChild(td);
+    });
+    tbdy.appendChild(tr);    
+  });
+  tbl.appendChild(tbdy);
+  body.appendChild(tbl);
+  body.appendChild(document.createElement("br"));;
   return tbl;
 }
 
