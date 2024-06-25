@@ -17,7 +17,7 @@
       defer
     ></script>
   </head>
-  <body class="bg-danger">
+  <body class="bg-danger" onload="getRiskPolicy()">
     <div class="container-fluid">
       <div class="col">
         <div class="card w-50 mx-auto mt-4">
@@ -29,8 +29,14 @@
             <p>
               Current executed risk policy:
             </p>
-            <div id="content">
+            <div id="contentRiskPol">
               
+            </div>
+            <hr>
+            <div id="contentThreshold">
+              <p>
+                <b>Threshold</b>
+              </p>
             </div>
             <hr>
             <form id="protectDemo">

@@ -16,18 +16,19 @@ function getRiskPolicy() {
       
       const obj = createRiskTableData(data);
       
-      createTable(obj,['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
+      createTable('contentRiskPol',obj,['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
       
       const obj2 = createThresholdData(data)
       
+      createTable('contentThreshold',obj2,['value1', 'value2'], ['High', 'Medium']);
       
     })
     .catch(err => console.log("getRiskPolicy: ", err))
   // })
 }
 
-function createTable(objectArray, fields, fieldTitles) {
-  let body = document.getElementById('content');
+function createTable(elem,objectArray, fields, fieldTitles) {
+  let body = document.getElementById(elem);
   let tbl = document.createElement('table');
   let thead = document.createElement('thead');
   let thr = document.createElement('tr');
@@ -110,8 +111,8 @@ function createThresholdData(data){
   
   let predTitles = [];
   
-  output.push({'high':riskPol_high_value,'text':'and above'});
-  output.push({'medium':riskPol_medium_value,'text':'and above'});
+  output.push({'value1':riskPol_high_value,'value2':riskPol_medium_value});
+  output.push({'value1':'and above','value2':'and above'});
     
   return output;
 }
