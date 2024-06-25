@@ -13,6 +13,7 @@ function getRiskPolicy() {
       
       const contentDiv = document.getElementById('content');
       
+      
       const obj = createTableObject(data);
       
       createTable([
@@ -58,9 +59,9 @@ function createTable(objectArray, fields, fieldTitles) {
 }
 
 function createTableObject(data){
-    const riskPol_high = data[0]._embedded.riskPolicySets[0];
-    const riskPol_medium = data[0]._embedded.riskPolicySets[1];
-    const predictorIDs = data[0]._embedded.evaluatedPredictors;
+    const riskPol_high = data[0]._embedded.riskPolicySets[0].riskPolicies[0];
+    const riskPol_medium = data[0]._embedded.riskPolicySets[0].riskPolicies[1];
+    const predictorIDs = data[0]._embedded.riskPolicySets[0].evaluatedPredictors;
     const predictors = data[1];
   
     let output = [];
@@ -70,4 +71,6 @@ function createTableObject(data){
     predictorIDs.forEach( (elem) => {
         predTitles.push(elem.id);
     });
+    
+    console.log(predTitles);
 }
