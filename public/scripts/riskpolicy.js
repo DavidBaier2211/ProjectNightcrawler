@@ -29,10 +29,18 @@ function createTable(objectArray, fields, fieldTitles) {
   let tbl = document.createElement('table');
   let thead = document.createElement('thead');
   let thr = document.createElement('tr');
+  let i=0;
   fieldTitles.forEach((fieldTitle) => {
     let th = document.createElement('th');
+    if(i>0){
+        th.style.cssText = 'text-align:center;';
+    }
+    else{
+      th.style.cssText = 'width:50%;';
+    }
     th.appendChild(document.createTextNode(fieldTitle));
     thr.appendChild(th);
+    i++;
   });
   thead.appendChild(thr);
   tbl.appendChild(thead);
@@ -41,15 +49,16 @@ function createTable(objectArray, fields, fieldTitles) {
   let tr = document.createElement('tr');
   objectArray.forEach((object) => {
     let tr = document.createElement('tr');
-    let i = 0;
+    let j = 0;
     fields.forEach((field) => {
       var td = document.createElement('td');
-      if(i>0){
+      if(j>0){
         td.style.cssText = 'text-align:center;';
       }
       
       td.appendChild(document.createTextNode(object[field]));
       tr.appendChild(td);
+      j++;
     });
     tbdy.appendChild(tr);    
   });
@@ -77,6 +86,7 @@ function createTableObject(data){
     riskPol_high.condition.aggregatedScores.forEach((elem) => {
       let obj = {};
       obj.name = predTitles[i];
+      if(obj.name == 'New Devive' || obj.name == 'Anonymous Network Detection' || obj.name == 'Geovelocity Anomaly')
       obj.medium = Math.round(elem.score/2);
       obj.high = elem.score;
       
