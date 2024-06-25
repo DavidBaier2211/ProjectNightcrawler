@@ -11,9 +11,9 @@ function getRiskPolicy() {
     .then(data => {
       console.log("Server data: "+data);
       
-      const riskPol_high = data._embedded.riskPolicySets[0];
-      const riskPol_medium = data._embedded.riskPolicySets[1];
-      const predictorIDs = data[0].evaluatedPredictors;
+      const riskPol_high = data[0]._embedded.riskPolicySets[0];
+      const riskPol_medium = data[0]._embedded.riskPolicySets[1];
+      const predictorIDs = data[0]._embedded.evaluatedPredictors;
       const predictors = data[1];
       
       const contentDiv = document.getElementById('content');
