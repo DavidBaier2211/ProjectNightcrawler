@@ -70,8 +70,7 @@ function createTableObject(data){
   
     predictorIDs.forEach( (elem) => {
       const json = jsonPath(predictors,'$._embedded.riskPredictors[?(@.id=="'+elem.id+'")]');
-      const obj = JSON.parse(json)
-      predTitles.push(obj.name);
+      predTitles.push(json[0].name);
     });
     
     let i = 0;
