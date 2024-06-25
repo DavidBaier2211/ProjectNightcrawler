@@ -11,19 +11,16 @@ function getRiskPolicy() {
     .then(data => {
       console.log("Server data: "+data);
       
-      const riskPol_high = data[0]._embedded.riskPolicySets[0];
-      const riskPol_medium = data[0]._embedded.riskPolicySets[1];
-      const predictorIDs = data[0]._embedded.evaluatedPredictors;
-      const predictors = data[1];
-      
       const contentDiv = document.getElementById('content');
+      
+      const obj = createTableObject(data);
       
       createTable([
         {name: 'Banana', price: '3.04'},
         {name: 'Orange', price: '2.56'},
         {name: 'Apple', price: '1.45'}
       ],
-      ['name', 'price'], ['Name', 'Price']);
+      ['name', 'medium', 'high'], ['Predictor Score', 'Medium', 'High']);
       
       
     })
@@ -58,4 +55,19 @@ function createTable(objectArray, fields, fieldTitles) {
   tbl.appendChild(tbdy);
   body.appendChild(tbl)
   return tbl;
+}
+
+function createTableObject(data){
+    const riskPol_high = data[0]._embedded.riskPolicySets[0];
+    const riskPol_medium = data[0]._embedded.riskPolicySets[1];
+    const predictorIDs = data[0]._embedded.evaluatedPredictors;
+    const predictors = data[1];
+  
+    let output = [];
+  
+    let predTitles = [];
+  
+    predictorIDs.forEach( (elem) => {
+        predTitles.push(elem.id);
+    });
 }
