@@ -152,9 +152,9 @@ fastify.all("/getRiskPolicy", (req, res) => {
             console.log(predictorIDs);
             console.log(data);
             
-            const out = []
+            const out = [content,data]
             
-            //res.send(data);  
+            res.send(out);  
           
           })
           .catch((err) => {
