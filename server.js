@@ -114,7 +114,12 @@ fastify.all("/getRiskPolicy", (req, res) => {
   // Get P1 Worker Token
   getPingOneToken((pingOneToken) => {
     // URL must match the Risk EnvID used to create the payload
-    const url =
+    const url_riskPol =
+      "https://api.pingone.eu/v1/environments/" +
+      process.env.envId +
+      "/riskPolicySets";
+    
+    const url_riskPred =
       "https://api.pingone.eu/v1/environments/" +
       process.env.envId +
       "/riskPolicySets";
@@ -125,7 +130,7 @@ fastify.all("/getRiskPolicy", (req, res) => {
     };
     
     /* Make the call to PingOne Protect endpoint*/
-    got(url, {
+    got(url_riskPol, {
       headers: headers,
       method: "get"
     })
@@ -137,6 +142,21 @@ fastify.all("/getRiskPolicy", (req, res) => {
         console.log(predictorIDs);
       
         //res.send(data);
+      
+        got(url_riskPred,{
+          headers: headers,
+          method: "get"
+        })
+          .json()
+          .then((data) => {
+          
+          })
+          .catch((err) => {
+            console.log(err);
+            res.send(err);
+          });
+      
+        
       })
       .catch((err) => {
         console.log(err);
