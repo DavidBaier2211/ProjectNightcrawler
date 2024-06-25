@@ -139,7 +139,7 @@ fastify.all("/getRiskPolicy", (req, res) => {
         const content = data._embedded.riskPolicySets[0];
         const predictorIDs = data._embedded.riskPolicySets[0].evaluatedPredictors
         
-      
+        
         //res.send(data);
       
         got(url_riskPred,{
