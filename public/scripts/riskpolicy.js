@@ -69,7 +69,14 @@ function createTableObject(data){
     let predTitles = [];
   
     predictorIDs.forEach( (elem) => {
-        predTitles.push(elem.id);
+      const title = jsonPath(predictors,'$._embedded.riskPredictors[?(@.id=="'+elem.id+'")].name')
+      predTitles.push(title);
+    });
+    
+    let i = 0;
+    riskPol_high.condition.aggregatedScores.forEach((elem) => {
+      let obj = {};
+      obj.name = predTitles[i]
     });
     
     console.log(predTitles);
