@@ -122,7 +122,7 @@ fastify.all("/getRiskPolicy", (req, res) => {
     const url_riskPred =
       "https://api.pingone.eu/v1/environments/" +
       process.env.envId +
-      "/riskPolicySets";
+      "/riskPredictors";
 
     // Construct headers
     const headers = {
@@ -138,8 +138,7 @@ fastify.all("/getRiskPolicy", (req, res) => {
       .then((data) => {
         const content = data._embedded.riskPolicySets[0];
         const predictorIDs = data._embedded.riskPolicySets[0].evaluatedPredictors
-        console.log(content);
-        console.log(predictorIDs);
+        
       
         //res.send(data);
       
@@ -149,7 +148,14 @@ fastify.all("/getRiskPolicy", (req, res) => {
         })
           .json()
           .then((data) => {
+            console.log(content);
+            console.log(predictorIDs);
             console.log(data);
+            
+            const out = []
+            
+            //res.send(data);  
+          
           })
           .catch((err) => {
             console.log(err);
