@@ -32,7 +32,7 @@ function getRiskPolicy() {
 }
 
 function createTable(objectArray, fields, fieldTitles) {
-  let body = document.getElementsByTagName('body')[0];
+  let body = document.getElementById('content');
   let tbl = document.createElement('table');
   let thead = document.createElement('thead');
   let thr = document.createElement('tr');
