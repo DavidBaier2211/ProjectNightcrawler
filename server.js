@@ -3,9 +3,9 @@
  * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
  */
 
-const path = require("path");
-const got = require("got");
-const btoa = require("btoa");
+import { join } from "path";
+import got, { post } from "got";
+import btoa from "btoa";
 
 // Require the fastify framework and instantiate it
 const fastify = require("fastify")({
@@ -15,7 +15,7 @@ const fastify = require("fastify")({
 
 // Setup our static files
 fastify.register(require("@fastify/static"), {
-  root: path.join(__dirname, "public"),
+  root: join(__dirname, "public"),
   prefix: "/", // optional: default '/'
 });
 
@@ -177,7 +177,7 @@ function getPingOneToken(cb) {
   const url = "https://auth.pingone.eu/" + process.env.envId + "/as/token";
   const basicAuth = btoa(process.env.clientId + ":" + process.env.clientSecret);
   
-  got.post(url, {
+  post(url, {
       headers: {
         Authorization: "Basic " + basicAuth,
       },
