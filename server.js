@@ -3,24 +3,40 @@
  * Check out the two endpoints this back-end API provides in fastify.get and fastify.post below
  */
 
-import { join } from "path";
-import got, { post } from "got";
+import got from "got";
 import btoa from "btoa";
 
-// Require the fastify framework and instantiate it
-const fastify = require("fastify")({
-  // Set this to true for detailed logging:
-  logger: false,
-});
+import Fastify from "fastify";
 
-// Setup our static files
-fastify.register(require("@fastify/static"), {
-  root: join(__dirname, "public"),
-  prefix: "/", // optional: default '/'
-});
+// Require the fastify framework and instantiate it
+const fastify = Fastify({ logger: false });
 
 // Formbody lets us parse incoming forms
-fastify.register(require("@fastify/formbody"));
+//import fastifyFormbody from '@fastify/fastify-formbody';
+//fastify.register(fastifyFormbody);
+
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+//import fastifyStatic from 'fastify-static';
+import fastifyStatic from '@fastify/static'
+
+fastify.register(fastifyStatic, {
+    root: path.join(__dirname, 'public')
+    //prefix: '/public/',
+});
+
+fastify.get('/', async (request, reply) => {
+	return reply.sendFile("index.html")
+})
+
+// server.js
+console.log(`Your port is ${process.env.PORT}`); // undefined
+import dotenv from 'dotenv'
+dotenv.config();
+console.log(`Your port is ${process.env.PORT}`); // 8626
 
 /******************************************
  * PingOne Risk - Evaluation request
@@ -114,6 +130,7 @@ fastify.all("/getRiskPolicy", (req, res) => {
   // Get P1 Worker Token
   getPingOneToken((pingOneToken) => {
     // URL must match the Risk EnvID used to create the payload
+    console.log(pingOneToken);
     const url_riskPol =
       "https://api.pingone.eu/v1/environments/" +
       process.env.envId +
@@ -177,7 +194,7 @@ function getPingOneToken(cb) {
   const url = "https://auth.pingone.eu/" + process.env.envId + "/as/token";
   const basicAuth = btoa(process.env.clientId + ":" + process.env.clientSecret);
   
-  post(url, {
+  got.post(url, {
       headers: {
         Authorization: "Basic " + basicAuth,
       },
@@ -193,7 +210,7 @@ function getPingOneToken(cb) {
 
 // Run the server and report out to the logs
 fastify.listen(
-  { port: process.env.PORT, host: "0.0.0.0" },
+  { port: process.env.PORT, host: "127.0.0.1" },
   function (err, address) {
     if (err) {
       console.error(err);
